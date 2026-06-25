@@ -26,7 +26,7 @@ export const projects: Project[] = [
     ],
     status: "live",
     featured: true,
-    year: 2025,
+    year: 2026,
     tech: [
       { name: "Next.js 14", category: "frontend" },
       { name: "TypeScript", category: "frontend" },
@@ -99,7 +99,7 @@ export const projects: Project[] = [
     ],
     status: "in-development",
     featured: true,
-    year: 2025,
+    year: 2026,
     tech: [
       { name: "Next.js 16", category: "frontend" },
       { name: "React 19", category: "frontend" },
@@ -175,7 +175,7 @@ export const projects: Project[] = [
     ],
     status: "open-source",
     featured: true,
-    year: 2025,
+    year: 2026,
     tech: [
       { name: "Python", category: "backend" },
       { name: "Typer", category: "tool" },
@@ -232,7 +232,7 @@ export const projects: Project[] = [
     ],
     status: "live",
     featured: false,
-    year: 2024,
+    year: 2026,
     tech: [
       { name: "Node.js", category: "backend" },
       { name: "Discord.js", category: "tool" },

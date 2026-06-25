@@ -55,8 +55,8 @@ function RecruiterFloatingButton({ isOpen, open }: { isOpen: boolean; open: () =
           transition={{ duration: 0.2 }}
           onClick={open}
           className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-4 py-3 rounded-full
-            bg-linear-to-r from-purple-700 to-purple-500 text-white text-sm font-semibold
-            shadow-lg shadow-purple-900/50 hover:brightness-110 hover:scale-105 active:scale-95
+            bg-accent text-white text-sm font-semibold
+            shadow-lg shadow-[0_0_20px_rgba(244,63,114,0.35)] hover:brightness-110 hover:scale-105 active:scale-95
             transition-all duration-200 cursor-pointer"
           aria-label="Open recruiter mode"
         >
@@ -71,8 +71,8 @@ function RecruiterFloatingButton({ isOpen, open }: { isOpen: boolean; open: () =
 function SectionLabel({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-purple-500">{icon}</span>
-      <p className="text-xs font-mono text-purple-500 tracking-wider uppercase">{label}</p>
+      <span className="text-accent">{icon}</span>
+      <p className="text-xs font-mono text-accent tracking-wider uppercase">{label}</p>
     </div>
   )
 }
@@ -104,25 +104,25 @@ function RecruiterPanel({ isOpen, close }: { isOpen: boolean; close: () => void 
             exit={{ x: "100%" }}
             transition={{ duration: 0.35, ease: [0.0, 0.0, 0.2, 1] }}
             className="fixed right-0 top-0 h-full z-50 w-full sm:w-120
-              bg-void-900 border-l border-purple-900/60 overflow-y-auto
-              shadow-[-20px_0_60px_rgba(107,33,168,0.2)]"
+              bg-void-900 border-l border-border-subtle overflow-y-auto
+              shadow-[-20px_0_60px_rgba(244,63,114,0.12)]"
             role="dialog"
             aria-label={r.title}
             aria-modal="true"
           >
             {/* Header */}
             <div className="sticky top-0 z-10 flex items-center justify-between p-6
-              border-b border-purple-900/40 bg-void-900/95 backdrop-blur-sm">
+              border-b border-border-subtle bg-void-900/95 backdrop-blur-sm">
               <div className="flex items-center gap-3">
-                <Sparkles size={18} className="text-purple-400" />
+                <Sparkles size={18} className="text-accent" />
                 <div>
-                  <h2 className="text-base font-bold text-purple-100">{r.title}</h2>
-                  <p className="text-xs text-purple-500 font-mono">{r.subtitle}</p>
+                  <h2 className="text-base font-bold text-text-primary">{r.title}</h2>
+                  <p className="text-xs text-text-muted font-mono">{r.subtitle}</p>
                 </div>
               </div>
               <button
                 onClick={close}
-                className="p-2 rounded-lg text-purple-500 hover:text-purple-300 hover:bg-purple-500/10 transition-colors cursor-pointer"
+                className="p-2 rounded-lg text-text-muted hover:text-accent-soft hover:bg-accent/10 transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X size={18} />
@@ -131,25 +131,25 @@ function RecruiterPanel({ isOpen, close }: { isOpen: boolean; close: () => void 
 
             <div className="p-6 flex flex-col gap-8">
               {/* Summary */}
-              <p className="text-sm text-purple-300 leading-relaxed">{r.summary}</p>
+              <p className="text-sm text-text-secondary leading-relaxed">{r.summary}</p>
 
               {/* Experience */}
               <section>
                 <SectionLabel icon={<Briefcase size={14} />} label={r.experience} />
                 <div className="mt-3 flex flex-col gap-3">
                   {/* Globo */}
-                  <div className="p-4 rounded-xl bg-void-800/60 border border-purple-900/40">
+                  <div className="p-4 rounded-xl bg-void-800/60 border border-border-subtle">
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <p className="text-sm font-semibold text-purple-200">{r.globoTitle}</p>
-                        <p className="text-xs text-purple-400">{r.globoCompany}</p>
+                        <p className="text-sm font-semibold text-text-primary">{r.globoTitle}</p>
+                        <p className="text-xs text-text-secondary">{r.globoCompany}</p>
                       </div>
-                      <span className="text-xs font-mono text-purple-600 shrink-0">{r.globoPeriod}</span>
+                      <span className="text-xs font-mono text-accent-gold shrink-0">{r.globoPeriod}</span>
                     </div>
                     <ul className="space-y-1">
                       {r.globoHighlights.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-xs text-purple-400">
-                          <CheckCircle2 size={12} className="text-purple-600 mt-0.5 shrink-0" />
+                        <li key={item} className="flex items-start gap-2 text-xs text-text-secondary">
+                          <CheckCircle2 size={12} className="text-accent mt-0.5 shrink-0" />
                           {item}
                         </li>
                       ))}
@@ -157,18 +157,18 @@ function RecruiterPanel({ isOpen, close }: { isOpen: boolean; close: () => void 
                   </div>
 
                   {/* Equinix */}
-                  <div className="p-4 rounded-xl bg-void-800/60 border border-purple-900/40">
+                  <div className="p-4 rounded-xl bg-void-800/60 border border-border-subtle">
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <p className="text-sm font-semibold text-purple-200">{r.equinixTitle}</p>
-                        <p className="text-xs text-purple-400">{r.equinixCompany}</p>
+                        <p className="text-sm font-semibold text-text-primary">{r.equinixTitle}</p>
+                        <p className="text-xs text-text-secondary">{r.equinixCompany}</p>
                       </div>
-                      <span className="text-xs font-mono text-purple-600 shrink-0">{r.equinixPeriod}</span>
+                      <span className="text-xs font-mono text-accent-gold shrink-0">{r.equinixPeriod}</span>
                     </div>
                     <ul className="space-y-1">
                       {r.equinixHighlights.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-xs text-purple-400">
-                          <CheckCircle2 size={12} className="text-purple-600 mt-0.5 shrink-0" />
+                        <li key={item} className="flex items-start gap-2 text-xs text-text-secondary">
+                          <CheckCircle2 size={12} className="text-accent mt-0.5 shrink-0" />
                           {item}
                         </li>
                       ))}
@@ -182,10 +182,10 @@ function RecruiterPanel({ isOpen, close }: { isOpen: boolean; close: () => void 
                 <SectionLabel icon={<GraduationCap size={14} />} label={r.education} />
                 <div className="mt-3 flex flex-col gap-2">
                   {r.educationItems.map(({ degree, status, period }) => (
-                    <div key={degree} className="flex items-center justify-between p-3 rounded-lg bg-void-800/60 border border-purple-900/40">
+                    <div key={degree} className="flex items-center justify-between p-3 rounded-lg bg-void-800/60 border border-border-subtle">
                       <div>
-                        <p className="text-xs font-medium text-purple-300">{degree}</p>
-                        <p className="text-xs text-purple-600 font-mono">{period}</p>
+                        <p className="text-xs font-medium text-text-secondary">{degree}</p>
+                        <p className="text-xs text-accent-gold font-mono">{period}</p>
                       </div>
                       <Badge variant="amber">
                         {status === "in-progress" ? (t.recruiter.title === "Recruiter Mode" ? "In Progress" : "Em Andamento") : "Done"}
@@ -214,22 +214,22 @@ function RecruiterPanel({ isOpen, close }: { isOpen: boolean; close: () => void 
                 <SectionLabel icon={<ExternalLink size={14} />} label={r.featuredProjects} />
                 <div className="mt-3 flex flex-col gap-3">
                   {featuredProjects.map((project) => (
-                    <div key={project.id} className="p-4 rounded-xl bg-void-800/60 border border-purple-900/40">
+                    <div key={project.id} className="p-4 rounded-xl bg-void-800/60 border border-border-subtle">
                       <div className="flex items-start justify-between mb-2">
-                        <p className="text-sm font-semibold text-purple-200">{project.name}</p>
+                        <p className="text-sm font-semibold text-text-primary">{project.name}</p>
                         {project.links.github && (
                           <a
                             href={project.links.github}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-purple-500 hover:text-purple-300 transition-colors"
+                            className="text-accent/60 hover:text-accent-soft transition-colors"
                             aria-label={`GitHub for ${project.name}`}
                           >
                             <Github size={14} />
                           </a>
                         )}
                       </div>
-                      <p className="text-xs text-purple-400 leading-relaxed mb-2">
+                      <p className="text-xs text-text-secondary leading-relaxed mb-2">
                         {lang === "pt" && project.taglinePt ? project.taglinePt : project.tagline}
                       </p>
                       <div className="flex flex-wrap gap-1">
@@ -256,7 +256,7 @@ function RecruiterPanel({ isOpen, close }: { isOpen: boolean; close: () => void 
               </section>
 
               {/* CTAs */}
-              <section className="flex flex-col gap-3 pt-2 border-t border-purple-900/40">
+              <section className="flex flex-col gap-3 pt-2 border-t border-border-subtle">
                 <Button
                   variant="primary"
                   size="lg"

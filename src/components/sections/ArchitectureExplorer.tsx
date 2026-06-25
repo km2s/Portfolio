@@ -20,18 +20,18 @@ const layerIcons: Record<string, React.ElementType> = {
 }
 
 const layerColors: Record<string, string> = {
-  Frontend: "text-purple-400 border-purple-500/40 bg-purple-500/10",
-  Backend: "text-blue-400 border-blue-500/40 bg-blue-500/10",
-  Database: "text-emerald-400 border-emerald-500/40 bg-emerald-500/10",
-  "External Services": "text-amber-400 border-amber-500/40 bg-amber-500/10",
-  Infrastructure: "text-pink-400 border-pink-500/40 bg-pink-500/10",
+  Frontend: "text-accent-soft border-border-glow bg-accent/10",
+  Backend: "text-accent border-border-subtle bg-accent/5",
+  Database: "text-accent-gold border-accent-gold/30 bg-accent-gold/10",
+  "External Services": "text-amber-300 border-amber-400/30 bg-amber-500/10",
+  Infrastructure: "text-accent-soft border-border-subtle bg-void-700/40",
 }
 
 function ArchNode({ layer, index }: { layer: ArchitectureLayer; index: number }) {
   const [hovered, setHovered] = useState(false)
   const { lang } = useLanguage()
   const Icon = layerIcons[layer.layer] ?? Layers
-  const colorClass = layerColors[layer.layer] ?? "text-purple-400 border-purple-500/40 bg-purple-500/10"
+  const colorClass = layerColors[layer.layer] ?? "text-accent-soft border-border-subtle bg-accent/10"
   const description = lang === "pt" && layer.descriptionPt ? layer.descriptionPt : layer.description
 
   return (
@@ -47,7 +47,7 @@ function ArchNode({ layer, index }: { layer: ArchitectureLayer; index: number })
             animate={{ scaleY: 1 }}
             transition={{ delay: index * 0.1 + 0.05, duration: 0.3 }}
             style={{ transformOrigin: "top" }}
-            className="w-px h-6 bg-linear-to-b from-purple-600/60 to-purple-600/20"
+            className="w-px h-6 bg-linear-to-b from-accent/60 to-accent/20"
           />
         </div>
       )}
@@ -111,7 +111,7 @@ export function ArchitectureExplorer() {
 
         {/* Mobile: horizontal scrollable selector */}
         <AnimatedSection delay={0.1} className="lg:hidden mb-4">
-          <p className="text-xs font-mono text-purple-600 tracking-wider uppercase mb-2 px-1">
+          <p className="text-xs font-mono text-accent tracking-wider uppercase mb-2 px-1">
             {t.architecture.selectProject}
           </p>
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
@@ -121,8 +121,8 @@ export function ArchitectureExplorer() {
                 onClick={() => setSelectedId(project.id)}
                 className={`shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                   selectedId === project.id
-                    ? "bg-purple-500/20 border border-purple-500/50 text-purple-200"
-                    : "border border-purple-900/40 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300"
+                    ? "bg-accent/15 border border-border-glow text-text-primary"
+                    : "border border-border-subtle text-text-muted hover:bg-accent/10 hover:text-text-secondary"
                 }`}
               >
                 {project.name}
@@ -135,7 +135,7 @@ export function ArchitectureExplorer() {
           {/* Desktop: vertical project selector */}
           <AnimatedSection delay={0.1} className="hidden lg:block">
             <div className="flex flex-col gap-2">
-              <p className="text-xs font-mono text-purple-600 tracking-wider uppercase mb-2 px-1">
+              <p className="text-xs font-mono text-accent tracking-wider uppercase mb-2 px-1">
                 {t.architecture.selectProject}
               </p>
               {projects.map((project) => (
@@ -144,8 +144,8 @@ export function ArchitectureExplorer() {
                   onClick={() => setSelectedId(project.id)}
                   className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                     selectedId === project.id
-                      ? "bg-purple-500/20 border border-purple-500/50 text-purple-200"
-                      : "border border-transparent text-purple-400 hover:bg-purple-500/10 hover:text-purple-300"
+                      ? "bg-accent/15 border border-border-glow text-text-primary"
+                      : "border border-transparent text-text-muted hover:bg-accent/10 hover:text-text-secondary"
                   }`}
                 >
                   <span className="block font-semibold">{project.name}</span>
@@ -162,8 +162,8 @@ export function ArchitectureExplorer() {
             <Card className="p-4 sm:p-8 min-h-125">
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <h3 className="text-lg font-bold text-purple-100">{selected.name}</h3>
-                  <p className="text-sm text-purple-400 font-mono mt-0.5">
+                  <h3 className="text-lg font-bold text-text-primary">{selected.name}</h3>
+                  <p className="text-sm text-text-secondary font-mono mt-0.5">
                     {lang === "pt" && selected.taglinePt ? selected.taglinePt : selected.tagline}
                   </p>
                 </div>
@@ -171,7 +171,7 @@ export function ArchitectureExplorer() {
                   {selected.tech.slice(0, 5).map((tech) => (
                     <span
                       key={tech.name}
-                      className="text-xs font-mono bg-purple-500/10 border border-purple-500/25 text-purple-400 px-2 py-0.5 rounded"
+                      className="text-xs font-mono bg-accent/10 border border-border-subtle text-text-secondary px-2 py-0.5 rounded"
                     >
                       {tech.name}
                     </span>
@@ -194,14 +194,14 @@ export function ArchitectureExplorer() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="mt-8 pt-6 border-t border-purple-900/40">
-                <p className="text-xs font-mono text-purple-600 mb-3 tracking-wider uppercase">
+              <div className="mt-8 pt-6 border-t border-border-subtle">
+                <p className="text-xs font-mono text-accent mb-3 tracking-wider uppercase">
                   {t.architecture.highlights}
                 </p>
                 <ul className="grid sm:grid-cols-2 gap-2">
                   {(lang === "pt" && selected.highlightsPt ? selected.highlightsPt : selected.highlights).map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-xs text-purple-400">
-                      <span className="text-purple-600 mt-0.5">▸</span>
+                    <li key={h} className="flex items-start gap-2 text-xs text-text-secondary">
+                      <span className="text-accent mt-0.5">▸</span>
                       <span>{h}</span>
                     </li>
                   ))}
