@@ -61,13 +61,13 @@ function AssistantMessage({ text, isLatest }: { text: string; isLatest: boolean 
 
   return (
     <div className="flex items-start gap-3">
-      <div className="w-6 h-6 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center shrink-0 mt-0.5">
-        <Bot size={12} className="text-purple-400" />
+      <div className="w-6 h-6 rounded-full bg-accent/15 border border-border-subtle flex items-center justify-center shrink-0 mt-0.5">
+        <Bot size={12} className="text-accent" />
       </div>
-      <div className="text-sm text-purple-200 leading-relaxed flex-1">
+      <div className="text-sm text-text-secondary leading-relaxed flex-1">
         {shown}
         {isLatest && !done && (
-          <span className="inline-block w-2 h-3.5 bg-purple-400 ml-0.5 align-middle animate-blink" />
+          <span className="inline-block w-2 h-3.5 bg-accent ml-0.5 align-middle animate-blink" />
         )}
       </div>
     </div>
@@ -148,8 +148,8 @@ export function AIAssistant() {
                   >
                     {msg.role === "user" ? (
                       <div className="flex items-start gap-3">
-                        <span className="text-purple-600 font-mono text-sm shrink-0 mt-0.5">$</span>
-                        <p className="text-sm text-purple-300 font-mono">{msg.text}</p>
+                        <span className="text-accent font-mono text-sm shrink-0 mt-0.5">$</span>
+                        <p className="text-sm text-accent-soft font-mono">{msg.text}</p>
                       </div>
                     ) : (
                       <AssistantMessage
@@ -164,8 +164,8 @@ export function AIAssistant() {
             </div>
 
             {/* Prompts */}
-            <div className="mt-6 pt-5 border-t border-purple-900/40">
-              <p className="text-xs font-mono text-purple-600 mb-3 tracking-wider uppercase">
+            <div className="mt-6 pt-5 border-t border-border-subtle">
+              <p className="text-xs font-mono text-accent mb-3 tracking-wider uppercase">
                 {t.ai.quickPrompts}
               </p>
               <div className="grid sm:grid-cols-2 gap-2">
@@ -174,11 +174,11 @@ export function AIAssistant() {
                     key={prompt}
                     onClick={() => handlePrompt(prompt)}
                     className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs text-left
-                      bg-purple-500/10 border border-purple-500/25 text-purple-300 font-mono
-                      hover:bg-purple-500/20 hover:border-purple-400/40 hover:text-purple-200
+                      bg-accent/8 border border-border-subtle text-text-secondary font-mono
+                      hover:bg-accent/15 hover:border-border-glow hover:text-text-primary
                       transition-all duration-150 cursor-pointer"
                   >
-                    <Send size={11} className="shrink-0 text-purple-500" />
+                    <Send size={11} className="shrink-0 text-accent" />
                     {prompt}
                   </button>
                 ))}
@@ -186,7 +186,7 @@ export function AIAssistant() {
             </div>
           </TerminalWindow>
 
-          <p className="mt-4 text-center text-xs font-mono text-purple-700">
+          <p className="mt-4 text-center text-xs font-mono text-text-muted">
             {t.ai.disclaimer}
           </p>
         </AnimatedSection>

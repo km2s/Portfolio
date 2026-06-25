@@ -1,19 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="12" fill="#0d0d1a"/>
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c084fc"/>
-      <stop offset="100%" stop-color="#7c3aed"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1018"/>
+      <stop offset="100%" stop-color="#0d0608"/>
+    </linearGradient>
+    <linearGradient id="rose" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f72"/>
+      <stop offset="100%" stop-color="#fb7fa0"/>
     </linearGradient>
   </defs>
+  <rect width="64" height="64" rx="13" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="13" fill="none" stroke="#f43f72" stroke-width="1.2" stroke-opacity="0.4"/>
   <text
     x="32"
-    y="41"
-    font-family="'Geist Mono', 'Courier New', monospace"
-    font-size="18"
-    font-weight="700"
-    fill="url(#g)"
+    y="43"
     text-anchor="middle"
-    letter-spacing="-0.5"
-  >km2s</text>
+    font-family="Georgia, 'Times New Roman', serif"
+    font-style="italic"
+    font-weight="700"
+    font-size="28"
+    fill="url(#rose)"
+    letter-spacing="-1"
+  >KM</text>
 </svg>
