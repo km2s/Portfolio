@@ -13,19 +13,19 @@ import type { SkillCategory } from "@/types"
 const categories: SkillCategory[] = ["Frontend", "Backend", "Database", "Cloud", "AI"]
 
 const categoryColors: Record<SkillCategory, string> = {
-  Frontend: "from-purple-600 to-purple-400",
-  Backend: "from-blue-700 to-blue-400",
-  Database: "from-emerald-700 to-emerald-400",
-  Cloud: "from-amber-700 to-amber-400",
-  AI: "from-pink-700 to-pink-400",
+  Frontend: "from-accent to-accent-soft",
+  Backend: "from-accent-dim to-accent",
+  Database: "from-accent-gold to-amber-300",
+  Cloud: "from-accent to-accent-soft",
+  AI: "from-accent-soft to-accent-gold",
 }
 
 const categoryTabColors: Record<SkillCategory, string> = {
-  Frontend: "bg-purple-500/20 border-purple-500/60 text-purple-200",
-  Backend: "bg-blue-500/20 border-blue-500/60 text-blue-200",
-  Database: "bg-emerald-500/20 border-emerald-500/60 text-emerald-200",
-  Cloud: "bg-amber-500/20 border-amber-500/60 text-amber-200",
-  AI: "bg-pink-500/20 border-pink-500/60 text-pink-200",
+  Frontend: "bg-accent/15 border-border-glow text-accent-soft",
+  Backend: "bg-accent-dim/20 border-accent-dim/50 text-accent",
+  Database: "bg-accent-gold/20 border-accent-gold/40 text-amber-300",
+  Cloud: "bg-accent/15 border-border-subtle text-text-secondary",
+  AI: "bg-accent-soft/15 border-accent-soft/40 text-accent-soft",
 }
 
 function SkillBar({
@@ -44,25 +44,25 @@ function SkillBar({
   return (
     <div ref={ref} className="flex flex-col gap-1.5">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-purple-200">{name}</span>
+        <span className="text-sm font-medium text-text-primary">{name}</span>
         <div className="flex items-center gap-2">
           {yearsOfExperience && (
-            <span className="text-xs font-mono text-purple-500">
+            <span className="text-xs font-mono text-text-muted">
               {lang === "pt"
                 ? `${yearsOfExperience}ano${yearsOfExperience > 1 ? "s" : ""}`
                 : `${yearsOfExperience}yr${yearsOfExperience > 1 ? "s" : ""}`}
             </span>
           )}
-          <span className="text-xs font-mono text-purple-400">{level}%</span>
+          <span className="text-xs font-mono text-text-secondary">{level}%</span>
         </div>
       </div>
-      <div className="h-1.5 rounded-full bg-purple-900/40 overflow-hidden">
+      <div className="h-1.5 rounded-full bg-void-800 overflow-hidden">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={inView ? { scaleX: 1 } : {}}
           transition={{ delay: index * 0.07, duration: 0.8, ease: [0.0, 0.0, 0.2, 1] }}
           style={{ transformOrigin: "left", width: `${level}%` }}
-          className={`h-full rounded-full bg-linear-to-r ${gradient}`}
+          className={`h-full rounded-full bg-gradient-to-r ${gradient}`}
         />
       </div>
     </div>
@@ -84,7 +84,7 @@ export function SkillsDashboard() {
   ]
 
   return (
-    <section id="skills" className="py-20 lg:py-32">
+    <section id="skills" className="py-20 lg:py-32 border-y border-border-subtle bg-void-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="mb-12">
           <SectionHeader
@@ -104,7 +104,7 @@ export function SkillsDashboard() {
               className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-200 cursor-pointer ${
                 activeCategory === cat
                   ? categoryTabColors[cat]
-                  : "border-transparent text-purple-500 hover:bg-purple-500/10 hover:text-purple-400"
+                  : "border-transparent text-text-muted hover:bg-accent/10 hover:text-text-secondary"
               }`}
             >
               {cat}
@@ -141,9 +141,9 @@ export function SkillsDashboard() {
         <AnimatedSection delay={0.2} className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
           {summaryStats.map(({ label, value, sub }) => (
             <Card key={label} className="p-4 text-center">
-              <p className="text-2xl font-bold text-purple-300 font-mono">{value}</p>
-              <p className="text-xs font-semibold text-purple-400 mt-0.5">{label}</p>
-              <p className="text-xs text-purple-600 mt-1">{sub}</p>
+              <p className="text-2xl font-bold text-accent-gold font-mono">{value}</p>
+              <p className="text-xs font-semibold text-text-secondary mt-0.5">{label}</p>
+              <p className="text-xs text-text-muted mt-1">{sub}</p>
             </Card>
           ))}
         </AnimatedSection>

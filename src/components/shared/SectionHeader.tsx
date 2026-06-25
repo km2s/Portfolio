@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-import { GradientText } from "@/components/ui/GradientText"
 
 interface SectionHeaderProps {
   label?: string
@@ -16,17 +15,19 @@ export function SectionHeader({ label, title, highlight, description, className,
   return (
     <div className={cn(center && "text-center", className)}>
       {label && (
-        <p className="text-xs font-mono font-medium tracking-widest uppercase text-purple-500 mb-3">
+        <p className="text-xs font-mono font-medium tracking-widest uppercase text-accent mb-3">
           {label}
         </p>
       )}
-      <h2 className="text-3xl sm:text-4xl font-bold text-purple-50 leading-tight">
+      <h2 className="font-serif text-3xl sm:text-4xl font-bold text-text-primary leading-tight">
         {titleParts[0]}
-        {highlight && <GradientText>{highlight}</GradientText>}
+        {highlight && (
+          <span className="italic font-normal text-accent-soft">{highlight}</span>
+        )}
         {titleParts[1]}
       </h2>
       {description && (
-        <p className="mt-4 text-purple-300/80 text-base leading-relaxed max-w-2xl">
+        <p className="mt-4 text-text-primary/60 text-base leading-relaxed max-w-2xl">
           {description}
         </p>
       )}

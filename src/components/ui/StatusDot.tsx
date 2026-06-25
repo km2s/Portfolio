@@ -6,13 +6,13 @@ interface StatusDotProps {
 }
 
 const colors = {
-  available: "bg-emerald-400",
+  available: "bg-accent",
   busy: "bg-amber-400",
   away: "bg-slate-400",
 }
 
 const rings = {
-  available: "bg-emerald-400/40",
+  available: "bg-accent/40",
   busy: "bg-amber-400/40",
   away: "bg-slate-400/40",
 }

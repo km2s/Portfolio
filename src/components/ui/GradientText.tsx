@@ -10,7 +10,7 @@ export function GradientText({ children, className, as: Tag = "span" }: Gradient
   return (
     <Tag
       className={cn(
-        "bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500",
+        "bg-gradient-to-r from-accent via-accent-soft to-accent",
         "bg-clip-text text-transparent",
         className
       )}

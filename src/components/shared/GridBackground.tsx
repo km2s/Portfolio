@@ -10,20 +10,17 @@ export function GridBackground({ className }: GridBackgroundProps) {
       className={cn("absolute inset-0 pointer-events-none overflow-hidden", className)}
       aria-hidden="true"
     >
-      {/* Dot grid */}
       <div
-        className="absolute inset-0 opacity-[0.15]"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
-          backgroundImage: "radial-gradient(circle, #a855f7 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, #f43f72 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
-      {/* Radial fade mask */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse at center, transparent 40%, #0d0d1a 80%)",
+          background: "radial-gradient(ellipse at center, transparent 40%, #0d0608 80%)",
         }}
       />
     </div>

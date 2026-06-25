@@ -9,11 +9,11 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  live: "bg-emerald-500/15 border-emerald-500/40 text-emerald-300",
+  live: "bg-accent/15 border-border-subtle text-accent-soft",
   dev: "bg-amber-500/15 border-amber-500/40 text-amber-300",
-  "open-source": "bg-purple-500/15 border-purple-500/40 text-purple-300",
-  purple: "bg-purple-500/15 border-purple-500/40 text-purple-300",
-  green: "bg-emerald-500/15 border-emerald-500/40 text-emerald-300",
+  "open-source": "bg-accent/10 border-border-subtle text-text-secondary",
+  purple: "bg-accent/10 border-border-subtle text-text-secondary",
+  green: "bg-accent/15 border-border-subtle text-accent-soft",
   amber: "bg-amber-500/15 border-amber-500/40 text-amber-300",
 }
 

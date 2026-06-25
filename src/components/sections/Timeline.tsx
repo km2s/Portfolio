@@ -12,10 +12,10 @@ import { useLanguage } from "@/hooks/useLanguage"
 import type { TimelineType } from "@/types"
 
 const typeConfig: Record<TimelineType, { icon: React.ElementType; color: string; bg: string }> = {
-  work: { icon: Briefcase, color: "text-blue-400", bg: "bg-blue-500/20 border-blue-500/40" },
-  project: { icon: Code2, color: "text-purple-400", bg: "bg-purple-500/20 border-purple-500/40" },
-  education: { icon: GraduationCap, color: "text-emerald-400", bg: "bg-emerald-500/20 border-emerald-500/40" },
-  milestone: { icon: Star, color: "text-amber-400", bg: "bg-amber-500/20 border-amber-500/40" },
+  work:      { icon: Briefcase,      color: "text-accent-soft",  bg: "bg-accent/10 border-border-subtle" },
+  project:   { icon: Code2,          color: "text-accent",       bg: "bg-accent/15 border-border-subtle" },
+  education: { icon: GraduationCap,  color: "text-accent-gold",  bg: "bg-accent-gold/10 border-border-subtle" },
+  milestone: { icon: Star,           color: "text-accent-soft",  bg: "bg-accent/10 border-border-subtle" },
 }
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -31,7 +31,7 @@ function EntryContent({ entry, color }: { entry: Entry; color: string }) {
   return (
     <div className="flex flex-col gap-1.5">
       <p className={`text-sm font-semibold ${color}`}>{title}</p>
-      <p className="text-xs text-purple-400 leading-relaxed">{description}</p>
+      <p className="text-xs text-text-primary/60 leading-relaxed">{description}</p>
       {entry.tech && (
         <div className="flex flex-wrap gap-1 mt-1">
           {entry.tech.map((t) => (
@@ -47,7 +47,7 @@ function DateLabel({ entry }: { entry: Entry }) {
   const { lang } = useLanguage()
   const months = lang === "pt" ? MONTHS_PT : MONTHS
   return (
-    <p className="text-xs font-mono text-purple-600">
+    <p className="text-xs font-mono text-accent-gold">
       {entry.month ? `${months[entry.month - 1]} ` : ""}{entry.year}
     </p>
   )
@@ -69,7 +69,7 @@ function DesktopEntry({ entry, index }: { entry: Entry; index: number }) {
         className="flex flex-col items-end text-right"
       >
         {isLeft ? (
-          <div className="rounded-xl border p-4 bg-void-800/60 border-purple-900/40 hover:border-purple-500/40 transition-colors max-w-sm w-full text-left">
+          <div className="rounded-xl border p-4 bg-void-800/60 border-border-subtle hover:border-border-glow transition-colors max-w-sm w-full text-left">
             <EntryContent entry={entry} color={color} />
           </div>
         ) : (
@@ -83,7 +83,7 @@ function DesktopEntry({ entry, index }: { entry: Entry; index: number }) {
           initial={{ scale: 0 }}
           animate={inView ? { scale: 1 } : {}}
           transition={{ duration: 0.3, delay: 0.05 }}
-          className={`w-9 h-9 rounded-full border flex items-center justify-center shrink-0 ${bg}`}
+          className={`w-9 h-9 rounded-full border flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(244,63,114,0.3)] ${bg}`}
         >
           <Icon size={15} className={color} />
         </motion.div>
@@ -96,7 +96,7 @@ function DesktopEntry({ entry, index }: { entry: Entry; index: number }) {
         transition={{ duration: 0.5, delay: 0.1 }}
       >
         {!isLeft ? (
-          <div className="rounded-xl border p-4 bg-void-800/60 border-purple-900/40 hover:border-purple-500/40 transition-colors max-w-sm">
+          <div className="rounded-xl border p-4 bg-void-800/60 border-border-subtle hover:border-border-glow transition-colors max-w-sm">
             <EntryContent entry={entry} color={color} />
           </div>
         ) : (
@@ -134,17 +134,17 @@ export function Timeline() {
             return (
               <AnimatedSection key={i} delay={i * 0.05}>
                 <div className="flex gap-4 items-start">
-                  <div className={`w-9 h-9 rounded-full border flex items-center justify-center shrink-0 ${bg}`}>
+                  <div className={`w-9 h-9 rounded-full border flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(244,63,114,0.25)] ${bg}`}>
                     <Icon size={15} className={color} />
                   </div>
                   <div className="flex flex-col gap-1 flex-1">
                     <div className="flex items-center justify-between">
                       <p className={`text-sm font-semibold ${color}`}>{title}</p>
-                      <span className="text-xs font-mono text-purple-600">
+                      <span className="text-xs font-mono text-accent-gold">
                         {entry.month ? `${months[entry.month - 1]} ` : ""}{entry.year}
                       </span>
                     </div>
-                    <p className="text-xs text-purple-400 leading-relaxed">{description}</p>
+                    <p className="text-xs text-text-primary/60 leading-relaxed">{description}</p>
                     {entry.tech && (
                       <div className="flex flex-wrap gap-1 mt-1">
                         {entry.tech.map((tech) => (
@@ -161,7 +161,10 @@ export function Timeline() {
 
         {/* Desktop: two-column timeline */}
         <div className="hidden sm:block relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-linear-to-b from-transparent via-purple-800/50 to-transparent" />
+          <div
+            className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+            style={{ background: "linear-gradient(to bottom, var(--accent), rgba(244,63,114,0.2), transparent)" }}
+          />
           <div className="flex flex-col gap-8">
             {timeline.map((entry, i) => (
               <DesktopEntry key={i} entry={entry} index={i} />

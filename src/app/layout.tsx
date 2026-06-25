@@ -1,25 +1,34 @@
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { RecruiterProvider } from "@/components/sections/RecruiterMode"
 import { LanguageProvider } from "@/hooks/useLanguage"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "700"],
 })
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 })
 
 export const metadata: Metadata = {
   title: "Karine Miranda — Full Stack Engineer",
   description:
-    "Full Stack Engineer at Globo. Building web applications with Vue.js, TypeScript, Next.js, Python, and FastAPI. Open to remote opportunities worldwide.",
+    "Full Stack Engineer at Globo. Building high-performance digital architectures with a Brazilian heart.",
   keywords: [
     "Full Stack Engineer",
     "Vue.js",
@@ -53,16 +62,18 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0d0d1a",
+  themeColor: "#0d0608",
   colorScheme: "dark",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-void-900 text-purple-100`}
-      >
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable} ${jetbrainsMono.variable} dark`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans antialiased bg-void-950 text-text-primary">
         <LanguageProvider>
           <RecruiterProvider>
             <Navbar />
