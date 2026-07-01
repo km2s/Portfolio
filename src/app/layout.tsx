@@ -5,6 +5,8 @@ import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { RecruiterProvider } from "@/components/sections/RecruiterMode"
 import { LanguageProvider } from "@/hooks/useLanguage"
+import { SmoothScroll } from "@/components/shared/SmoothScroll"
+import { MagneticCursor } from "@/components/shared/MagneticCursor"
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -73,12 +75,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${playfair.variable} ${inter.variable} ${jetbrainsMono.variable} dark`}
       suppressHydrationWarning
     >
-      <body className="font-sans antialiased bg-void-950 text-text-primary">
+      <body className="font-sans antialiased bg-void-950 text-text-primary has-magnetic-cursor">
         <LanguageProvider>
           <RecruiterProvider>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
+            <SmoothScroll>
+              <MagneticCursor />
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </SmoothScroll>
           </RecruiterProvider>
         </LanguageProvider>
       </body>

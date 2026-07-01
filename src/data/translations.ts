@@ -139,6 +139,8 @@ export const translations = {
         "A static AI interface. Ask about projects, skills, experience, or contact info.",
       disclaimer: "* Responses are static — no live AI backend required",
       quickPrompts: "Quick prompts",
+      inputPlaceholder: "Ask anything about Karine…",
+      send: "Send",
       defaultPrompts: [
         "Tell me about Karine",
         "What technologies does she know?",
@@ -293,6 +295,8 @@ export const translations = {
         "Interface de IA estática. Pergunte sobre projetos, skills, experiência ou contato.",
       disclaimer: "* Respostas são estáticas — sem backend de IA em tempo real",
       quickPrompts: "Perguntas rápidas",
+      inputPlaceholder: "Pergunte qualquer coisa sobre a Karine…",
+      send: "Enviar",
       defaultPrompts: [
         "Quem é Karine?",
         "Quais tecnologias ela usa?",

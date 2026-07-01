@@ -1,17 +1,19 @@
 "use client"
 
+
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Database, Globe, Server, Zap, Layers, Box } from "lucide-react"
+import { Database, Globe, Server, Zap, Layers, Box, type LucideIcon } from "lucide-react"
 import { projects } from "@/data/projects"
 import { AnimatedSection } from "@/components/shared/AnimatedSection"
 import { SectionHeader } from "@/components/shared/SectionHeader"
-import { Card } from "@/components/ui/Card"
+import { Card } from "@/components/portfolio-ui/Card"
+import { ArchitectureStack3D } from "@/components/shared/ArchitectureStack3D"
 import { useT } from "@/hooks/useT"
 import { useLanguage } from "@/hooks/useLanguage"
 import type { ArchitectureLayer } from "@/types"
 
-const layerIcons: Record<string, React.ElementType> = {
+const layerIcons: Record<string, LucideIcon> = {
   Frontend: Globe,
   Backend: Server,
   Database: Database,
@@ -186,13 +188,17 @@ export function ArchitectureExplorer() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.25 }}
-                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
                 >
-                  {selected.architecture.map((layer, i) => (
-                    <ArchNode key={layer.layer} layer={layer} index={i} />
-                  ))}
+                  <ArchitectureStack3D layers={selected.architecture} lang={lang} />
                 </motion.div>
               </AnimatePresence>
+
+              {/* Compact grid for accessibility / scanning */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
+                {selected.architecture.map((layer, i) => (
+                  <ArchNode key={`grid-${layer.layer}`} layer={layer} index={i} />
+                ))}
+              </div>
 
               <div className="mt-8 pt-6 border-t border-border-subtle">
                 <p className="text-xs font-mono text-accent mb-3 tracking-wider uppercase">

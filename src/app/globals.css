@@ -72,6 +72,15 @@
   100% { transform: translateY(100vh); }
 }
 
+@keyframes aurora-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
@@ -120,4 +129,30 @@ body {
 }
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+/* Animated rose→gold conic gradient border (AuroraBorder) */
+.aurora-border-shell::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  pointer-events: none;
+  background: conic-gradient(from 0deg, transparent 0%, rgba(244, 63, 114, 0.55) 18%, rgba(245, 158, 11, 0.45) 32%, transparent 50%, rgba(251, 127, 160, 0.4) 70%, transparent 100%);
+  animation: aurora-spin 14s linear infinite;
+}
+.aurora-border-shell {
+  isolation: isolate;
+}
+
+/* Hide native cursor when the magnetic cursor is mounted */
+.has-magnetic-cursor,
+.has-magnetic-cursor * {
+  cursor: none !important;
+}
+@media (hover: none) {
+  .has-magnetic-cursor,
+  .has-magnetic-cursor * {
+    cursor: auto !important;
+  }
 }

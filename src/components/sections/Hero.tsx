@@ -1,13 +1,24 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useRef } from "react"
+import dynamic from "next/dynamic"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, Download, Github, Terminal } from "lucide-react"
-import { Button } from "@/components/ui/Button"
-import { StatusDot } from "@/components/ui/StatusDot"
+import { Button } from "@/components/portfolio-ui/Button"
+import { StatusDot } from "@/components/portfolio-ui/StatusDot"
 import { GridBackground } from "@/components/shared/GridBackground"
 import { TerminalWindow } from "@/components/shared/TerminalWindow"
+import { TypewriterTerminal } from "@/components/shared/TypewriterTerminal"
+import { AuroraBorder } from "@/components/shared/AuroraBorder"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { useT } from "@/hooks/useT"
+
+// The 3D orb is WebGL/client-only — load without SSR to avoid hydration and
+// server-runtime issues with three.js.
+const Hero3DScene = dynamic(
+  () => import("@/components/shared/Hero3DScene").then((m) => m.Hero3DScene),
+  { ssr: false }
+)
 
 const containerVariants = {
   hidden: {},
@@ -16,7 +27,7 @@ const containerVariants = {
 
 const itemVariants = (reduced: boolean) => ({
   hidden: { opacity: 0, y: reduced ? 0 : 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
 })
 
 const codeLines = [
@@ -39,13 +50,25 @@ const codeLines = [
 export function Hero() {
   const reduced = useReducedMotion()
   const t = useT()
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] })
+  const nameY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : -120])
+  const nameOpacity = useTransform(scrollYProgress, [0, 0.6], [1, reduced ? 1 : 0.1])
+  const termY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : -60])
+  const sceneY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 140])
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden"
+      className="relative flex items-center pt-28 pb-20 lg:pt-32 lg:pb-24 overflow-hidden"
     >
       <GridBackground />
+      <motion.div style={{ y: sceneY }} className="absolute inset-0">
+        <Hero3DScene />
+      </motion.div>
+
+
 
       {/* Ambient bloom globs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -83,9 +106,9 @@ export function Hero() {
             </motion.div>
 
             {/* Name */}
-            <motion.div variants={itemVariants(reduced)}>
+            <motion.div variants={itemVariants(reduced)} style={{ y: nameY, opacity: nameOpacity }}>
               <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-[-0.01em]">
-                <span className="text-text-primary">Karine</span>
+                <span className="relative inline-block bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(110deg, #fff0f3 0%, #fb7fa0 40%, #f43f72 60%, #fff0f3 100%)", backgroundSize: "200% 100%", animation: reduced ? undefined : "shimmer 6s linear infinite" }}>Karine</span>
                 <br />
                 <i className="font-normal text-accent-soft">Miranda</i>
               </h1>
@@ -121,8 +144,8 @@ export function Hero() {
                 size="lg"
                 onClick={() => {
                   const a = document.createElement("a")
-                  a.href = "/resume/karine-miranda-cv.pdf"
-                  a.download = "Karine-Miranda-Resume.pdf"
+                  a.href = "/resume/Karine_Miranda_CV.pdf"
+                  a.download = "Karine_Miranda_CV.pdf"
                   a.click()
                 }}
               >
@@ -162,36 +185,15 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, x: reduced ? 0 : 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.1, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.1, delay: 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="hidden lg:block"
-            style={{ animation: reduced ? undefined : "float 6s ease-in-out infinite" }}
+            style={{ y: termY, animation: reduced ? undefined : "float 6s ease-in-out infinite" }}
           >
-            <TerminalWindow title="~/karine/profile.ts">
-              <div className="space-y-0.5">
-                {codeLines.map((line, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 + i * 0.06, duration: 0.3 }}
-                    className={`${line.color} leading-6`}
-                    style={{ paddingLeft: `${line.indent * 1.5}rem` }}
-                  >
-                    {line.text}
-                  </motion.div>
-                ))}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6 + codeLines.length * 0.06 }}
-                  className="text-text-muted mt-2"
-                >
-                  <span className="text-text-muted">$ </span>
-                  <span className="text-text-secondary">{t.hero.terminalOpen}</span>
-                  <span className="inline-block w-2 h-4 bg-accent ml-0.5 align-middle animate-blink" />
-                </motion.div>
-              </div>
-            </TerminalWindow>
+            <AuroraBorder>
+              <TerminalWindow title="~/karine/profile.ts">
+                <TypewriterTerminal lines={codeLines} prompt={t.hero.terminalOpen} />
+              </TerminalWindow>
+            </AuroraBorder>
           </motion.div>
         </div>
       </div>

@@ -40,6 +40,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/km2s/rpg-bot",
+      live: "https://saga-ruddy.vercel.app/characters",
     },
     architecture: [
       {
@@ -116,6 +117,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/km2s/beauty-store",
+      live: "https://beauty-store-rose.vercel.app/",
     },
     architecture: [
       {

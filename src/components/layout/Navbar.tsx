@@ -1,8 +1,9 @@
 "use client"
 
+
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Sparkles } from "lucide-react"
+import { Menu, X, Briefcase } from "lucide-react"
 import { useActiveSection } from "@/hooks/useActiveSection"
 import { useRecruiterMode } from "@/components/sections/RecruiterMode"
 import { useLanguage } from "@/hooks/useLanguage"
@@ -90,13 +91,16 @@ export function Navbar() {
 
           <button
             onClick={open}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold
-              bg-accent text-white hover:bg-accent-dim transition-all duration-150 cursor-pointer ml-1
-              shadow-[0_0_16px_rgba(244,63,114,0.3)]"
+            className="group relative flex items-center gap-2 pl-2.5 pr-3 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-[0.14em] font-semibold
+              text-text-primary border border-border-subtle bg-void-800/60 hover:border-accent/60 hover:text-accent-soft
+              transition-all duration-200 cursor-pointer ml-1"
             aria-label="Open recruiter mode"
           >
-            <Sparkles size={11} />
+            <span className="flex items-center justify-center w-4 h-4 rounded-full bg-accent/15 text-accent-soft group-hover:bg-accent/25 transition-colors">
+              <Briefcase size={9} strokeWidth={2.5} />
+            </span>
             {t.nav.recruiterMode}
+            <span className="w-1 h-1 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" aria-hidden="true" />
           </button>
         </nav>
       </div>
@@ -156,11 +160,14 @@ export function Navbar() {
               ))}
               <button
                 onClick={() => { open(); setMobileOpen(false) }}
-                className="mt-2 flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold
-                  bg-accent text-white cursor-pointer"
+                className="mt-2 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-xs font-mono uppercase tracking-[0.14em] font-semibold
+                  text-text-primary border border-border-subtle bg-void-800/60 cursor-pointer"
               >
-                <Sparkles size={14} />
+                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-accent/15 text-accent-soft">
+                  <Briefcase size={10} strokeWidth={2.5} />
+                </span>
                 {t.nav.recruiterMode}
+                <span className="w-1 h-1 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" aria-hidden="true" />
               </button>
             </div>
           </motion.div>
