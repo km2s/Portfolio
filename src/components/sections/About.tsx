@@ -57,27 +57,6 @@ export function About() {
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 items-start">
           {/* Left: text content */}
           <AnimatedSection className="flex flex-col gap-8">
-            {/* Signature card */}
-            <div className="relative rounded-2xl p-[1px] overflow-hidden"
-              style={{ background: "linear-gradient(135deg, rgba(244,63,114,0.35), transparent 45%, rgba(245,158,11,0.25))" }}>
-              <div className="relative rounded-[15px] bg-void-900/80 backdrop-blur-md p-6">
-                <div aria-hidden className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent/10 blur-3xl" />
-                <div className="relative flex items-start gap-4">
-                  <div className="relative shrink-0 flex items-center justify-center w-14 h-14 rounded-full border border-border-glow"
-                    style={{ background: "radial-gradient(circle at 30% 30%, rgba(251,127,160,0.45), rgba(138,26,53,0.7))" }}>
-                    <span className="font-serif italic font-bold text-text-primary text-lg">KM</span>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-mono text-accent tracking-[0.2em] uppercase">// signature</p>
-                    <p className="mt-1 font-serif italic text-text-primary text-lg leading-snug">
-                      "Software is a craft. I ship products, not tickets."
-                    </p>
-                    <p className="text-xs text-text-muted font-mono mt-2">— Karine Miranda</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <p className="text-text-primary/75 leading-relaxed">{t.about.summary1}</p>
             <p className="text-text-primary/60 leading-relaxed">{t.about.summary2}</p>
 
