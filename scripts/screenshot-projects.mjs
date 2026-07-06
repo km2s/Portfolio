@@ -15,14 +15,17 @@ mkdirSync(outDir, { recursive: true })
 // Keys must match the project `id` in src/data/projects.ts, since the UI
 // resolves the image as /projects/<id>.png.
 const targets = [
-  { id: "saga-rpg", url: "https://saga-ruddy.vercel.app/characters" },
+  { id: "saga-rpg", url: "https://saga-ruddy.vercel.app/" },
   { id: "beauty-store", url: "https://beauty-store-rose.vercel.app/" },
+  { id: "marcou", url: "https://marcou-mocha.vercel.app/" },
 ]
 
 const browser = await chromium.launch()
 const context = await browser.newContext({
   viewport: { width: 1280, height: 800 },
-  deviceScaleFactor: 1.5,
+  // DSF 1 keeps files light (these are small hover previews); illustrated
+  // pages like Saga balloon at higher scale factors.
+  deviceScaleFactor: 1,
 })
 
 let failures = 0

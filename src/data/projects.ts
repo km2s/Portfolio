@@ -40,7 +40,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/km2s/rpg-bot",
-      live: "https://saga-ruddy.vercel.app/characters",
+      live: "https://saga-ruddy.vercel.app/",
     },
     architecture: [
       {
@@ -72,6 +72,83 @@ export const projects: Project[] = [
         tech: ["Vercel", "pnpm workspaces"],
         description: "Monorepo: apps/web + apps/bot + packages/database. Vercel for web deploy.",
         descriptionPt: "Monorepo: apps/web + apps/bot + packages/database. Vercel para deploy do web.",
+      },
+    ],
+  },
+  {
+    id: "marcou",
+    name: "Marcou",
+    tagline: "Multi-tenant scheduling SaaS with bulletproof anti-double-booking.",
+    taglinePt: "SaaS de agendamento multi-tenant com anti-double-booking à prova de falhas.",
+    description:
+      "A booking platform for service businesses (salons, clinics, studios). Clients book through a public page while owners and staff manage the calendar in-app. Its core is preventing double-booking under real concurrency — guaranteed across three layers and proven by a two-thread race test.",
+    descriptionPt:
+      "Uma plataforma de agendamento para negócios de serviço (salões, clínicas, estúdios). O cliente agenda por uma página pública enquanto dono e profissionais gerenciam a agenda no app. O núcleo é impedir double-booking sob concorrência real — garantido em três camadas e provado por um teste de corrida com duas threads.",
+    highlights: [
+      "Anti-double-booking in 3 layers: PostgreSQL exclusion constraint (btree_gist), optimistic locking, and 5-minute holds",
+      "Proven under concurrency: a two-thread test races the same slot — exactly one 201, the other 409",
+      "Multi-tenant isolation in 3 layers: TenantContext, Hibernate @TenantId, and PostgreSQL Row-Level Security (fail-closed)",
+      "RBAC (Owner × Professional), anti-IDOR, rate limiting, and RFC 7807 problem+json errors",
+      "15 integration test classes via Testcontainers; interactive OpenAPI/Swagger docs",
+    ],
+    highlightsPt: [
+      "Anti-double-booking em 3 camadas: exclusion constraint no PostgreSQL (btree_gist), optimistic locking e holds de 5 minutos",
+      "Provado sob concorrência: teste com duas threads disputa o mesmo slot — exatamente um 201, o outro 409",
+      "Isolamento multi-tenant em 3 camadas: TenantContext, Hibernate @TenantId e Row-Level Security do PostgreSQL (fail-closed)",
+      "RBAC (Dono × Profissional), anti-IDOR, rate limiting e erros em problem+json (RFC 7807)",
+      "15 classes de teste de integração com Testcontainers; docs interativas OpenAPI/Swagger",
+    ],
+    status: "live",
+    featured: true,
+    year: 2026,
+    tech: [
+      { name: "Java 21", category: "backend" },
+      { name: "Spring Boot 3.5", category: "backend" },
+      { name: "Hibernate 6", category: "backend" },
+      { name: "PostgreSQL 17", category: "database" },
+      { name: "Flyway", category: "database" },
+      { name: "Supabase", category: "database" },
+      { name: "React 19", category: "frontend" },
+      { name: "TanStack Start", category: "frontend" },
+      { name: "TailwindCSS", category: "frontend" },
+      { name: "shadcn/ui", category: "frontend" },
+      { name: "Docker", category: "cloud" },
+      { name: "Vercel", category: "cloud" },
+    ],
+    links: {
+      github: "https://github.com/km2s/marcou",
+      live: "https://marcou-mocha.vercel.app/",
+    },
+    architecture: [
+      {
+        layer: "Frontend",
+        tech: ["React 19", "TanStack Start", "Tailwind v4", "shadcn/ui"],
+        description: "SPA with the \"Atelier\" design system — a public booking page plus an owner/staff dashboard, deployed on Vercel.",
+        descriptionPt: "SPA com o design system \"Atelier\" — página pública de agendamento e dashboard de dono/profissional, deploy na Vercel.",
+      },
+      {
+        layer: "Backend",
+        tech: ["Java 21", "Spring Boot 3.5", "Spring Data JPA", "MapStruct", "JWT"],
+        description: "Package-by-feature (api → application → domain → infrastructure), REST with problem+json, JWT auth + RBAC.",
+        descriptionPt: "Package-by-feature (api → application → domain → infrastructure), REST com problem+json, auth JWT + RBAC.",
+      },
+      {
+        layer: "Database",
+        tech: ["PostgreSQL 17", "btree_gist", "Flyway", "Row-Level Security"],
+        description: "An exclusion constraint physically blocks overlapping bookings; RLS fail-closed backs up tenant isolation; Flyway migrations.",
+        descriptionPt: "Uma exclusion constraint bloqueia fisicamente agendamentos sobrepostos; RLS fail-closed reforça o isolamento de tenant; migrations com Flyway.",
+      },
+      {
+        layer: "External Services",
+        tech: ["Idempotency-Key", "OpenAPI / Swagger", "Rate limiting"],
+        description: "Idempotent confirmation for safe network retries, interactive API docs, and rate-limited login and holds.",
+        descriptionPt: "Confirmação idempotente para retries seguros de rede, docs de API interativas e rate limit em login e holds.",
+      },
+      {
+        layer: "Infrastructure",
+        tech: ["Docker (multi-stage)", "Vercel", "Supabase", "Testcontainers"],
+        description: "Dockerized backend (Railway/Render/Fly.io), Vercel front, Supabase Postgres; 15 integration test classes.",
+        descriptionPt: "Backend dockerizado (Railway/Render/Fly.io), front na Vercel, Postgres no Supabase; 15 classes de teste de integração.",
       },
     ],
   },
